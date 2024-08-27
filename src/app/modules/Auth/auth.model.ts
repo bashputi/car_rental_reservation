@@ -1,8 +1,8 @@
 import { model, Schema } from "mongoose";
-import { TUser, userModel } from "./user.interfase";
-import { user_role } from "./user.constant";
 import bcryptjs from "bcryptjs";
 import config from "../../config";
+import { TUser, userModel } from "./auth.interfase";
+import { user_role } from "./auth.constant";
 
 
 const UserSchema = new Schema<TUser, userModel>(
