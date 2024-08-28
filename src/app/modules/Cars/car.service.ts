@@ -10,12 +10,40 @@ const createCar = async (payload: TCar) => {
     return result;
 };
 
-const GetAllCar = async () => {
-    const result = await Car.find();
-    if(!result) {
+const GetAllCar = async (search: string, type: string, sortByPrice: 'asc' | 'desc' = 'asc', page: number = 1, limit: number = 10) => {
+    const query: any = {};
+    
+    if(search) {
+        query.$or = [
+            { name: { $regex: search, $options: 'i' }},
+            { color: { $regex: search, $options: 'i' }}
+        ];
+    }
+
+    if(type) {
+        query.type = type;
+    }
+
+    const sortOption = sortByPrice === 'asc' ? 'price' : '-price';
+    const skip = (page -1) * limit;
+
+    const cars = await Car.find(query)
+    .sort(sortOption)
+    .select('id name type color price')
+    .skip(skip).limit(limit);
+
+    if(!cars) {
         throw new AppError(httpStatus.NOT_FOUND, "No Data Found");
     }
-    return result;
+
+    const total = await Car.countDocuments(query);
+
+    return {
+        cars,
+        total,
+        page,
+        pages: Math.ceil(total / limit),
+    }
 };
 
 const getSingleCar = async (id: string) => {
