@@ -23,9 +23,9 @@ export interface TUser {
 
 export interface TUserDocument extends TUser, Document {}
 
-export interface userModel extends Model<TUserDocument> {
+export interface UserModel extends Model<TUserDocument> {
     isUserExistByCustomerId(email: string): Promise<TUserDocument>;
-    isPasswordMatch(
+    isPasswordMatched(
         plainTextPassword: string,
         hashTexPassword: string
     ): Promise<boolean>;
