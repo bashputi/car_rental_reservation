@@ -11,5 +11,7 @@ router.post(
     AuthControllers.registerUser
 );
 router.post("/signin", AuthControllers.userLogin);
+router.post("/forget_password", AuthControllers.userForgetPassword);
+router.post("/reset_password", AuthControllers.userResetPassword);
 
 export const AuthRoute = router;

@@ -30,10 +30,21 @@ UserSchema.pre("save", async function (next) {
   );
   next();
 });
+
 UserSchema.post("save", async function (doc, next) {
   doc.password = "";
   next();
 });
+
+UserSchema.statics.updatePassword = async function (id: string, password: string) {
+  const hashedPassword = await bcryptjs.hash(password, Number(config.bcrypt_salt_round));
+
+  return await this.findByIdAndUpdate(
+    id,
+    { password: hashedPassword },
+    { new: true, runValidators: true }
+  ).select("+password");
+};
 
 UserSchema.statics.isUserExistByCustomerId = async function (email: string) {
   return await User.findOne({ email }).select("+password");
