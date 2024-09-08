@@ -7,11 +7,13 @@ import router from './app/route';
 
 
 const app: Application = express()
-const corsOptions = {
-  origin: 'http://localhost:5173', // replace with your frontend URL
-  credentials: true,
-};
-app.use(cors(corsOptions));
+
+// const corsOptions = {
+//   origin: 'http://localhost:5173', 
+//   credentials: true,
+// };
+
+app.use(cors());
 
 app.use(express.json());
 app.use(cookieParser());

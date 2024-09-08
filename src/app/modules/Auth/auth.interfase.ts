@@ -6,8 +6,6 @@ import { user_role } from "./auth.constant";
 
 
 export type TUserLogin = {
-    id: any;
-    token: any;
     email: string;
     password: string;
 };
@@ -21,7 +19,6 @@ export interface TUser {
     password: string;
     phone: string;
     address: string;
-    token: string;
 }
 
 export interface TUserDocument extends TUser, Document {}

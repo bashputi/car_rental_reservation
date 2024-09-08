@@ -35,32 +35,32 @@ const userLogin = catchAsync(async (req, res) => {
 });
 
 
-const userForgetPassword = catchAsync(async (req, res) => {
-    const {name, email} = await AuthService.forgetPassword( req.body );
+// const userForgetPassword = catchAsync(async (req, res) => {
+//     const {name, email} = await AuthService.forgetPassword( req.body );
     
-    sendResponce(res, {
-        statusCode: httpStatus.OK,
-        success: true,
-        message: `Hello ${name}, a password reset link has been sent to your email address. Please check your ${email} to reset your password.`,
-        data: {} ,
-    });
-});
+//     sendResponce(res, {
+//         statusCode: httpStatus.OK,
+//         success: true,
+//         message: `Hello ${name}, a password reset link has been sent to your email address. Please check your ${email} to reset your password.`,
+//         data: {} ,
+//     });
+// });
 
-const userResetPassword = catchAsync(async (req, res) => {
-    const result = await AuthService.userPasswordReset(req.body);
+// const userResetPassword = catchAsync(async (req, res) => {
+//     const result = await AuthService.userPasswordReset(req.body);
 
-    sendResponce(res, {
-        statusCode: httpStatus.OK,
-        success: true,
-        message: 'Password reset successfully!',
-        data: result,
-    });
-});
+//     sendResponce(res, {
+//         statusCode: httpStatus.OK,
+//         success: true,
+//         message: 'Password reset successfully!',
+//         data: result,
+//     });
+// });
 
 
 export const AuthControllers = {
     registerUser,
     userLogin,
-    userForgetPassword,
-    userResetPassword,
+    // userForgetPassword,
+    // userResetPassword,
 }

@@ -54,66 +54,66 @@ const loginUser = async (payload: TUserLogin) => {
     };
 };
 
-const forgetPassword = async (payload: TUserLogin) => {
-    const user = await User.findOne({ email: payload.email });
+// const forgetPassword = async (payload: TUserLogin) => {
+//     const user = await User.findOne({ email: payload.email });
 
-    if(!user) {
-        throw new AppError(httpStatus.CONFLICT, "User not exists!");
-    }
-    const id = user._id;
-    const name = user.name;
-    const email = user.email;
+//     if(!user) {
+//         throw new AppError(httpStatus.CONFLICT, "User not exists!");
+//     }
+//     const id = user._id;
+//     const name = user.name;
+//     const email = user.email;
 
-    const jwtPayload = {
-        email: user.email,
-        role: user.role,
-      };
+//     const jwtPayload = {
+//         email: user.email,
+//         role: user.role,
+//       };
   
-      const accessToken = accesstoken(
-          jwtPayload,
-          config.jwt_access_token as string,
-          "7d"
-      );
-      const token = `${accessToken}`;
+//       const accessToken = accesstoken(
+//           jwtPayload,
+//           config.jwt_access_token as string,
+//           "7d"
+//       );
+//       const token = `${accessToken}`;
 
-      const url = config.URL;
-      const URL = `${url}/reset_password/${id}/${token}`;
+//       const url = config.URL;
+//       const URL = `${url}/reset_password/${id}/${token}`;
 
-       resetPasswordEmail(email, URL, name );
+//        resetPasswordEmail(email, URL, name );
 
 
-    return {
-        name, email
-    };
-};
+//     return {
+//         name, email
+//     };
+// };
 
-const userPasswordReset = async (payload: { id: string; token: string; password: string; }) => {
+// const userPasswordReset = async (payload: { id: string; token: string; password: string; }) => {
     
-    const user = await User.findOne({ _id: payload.id });
+//     const user = await User.findOne({ _id: payload.id });
 
-    if(!user) {
-        throw new AppError(httpStatus.CONFLICT, "User not exists!");
-    }
+//     if(!user) {
+//         throw new AppError(httpStatus.CONFLICT, "User not exists!");
+//     }
 
-    const token = payload?.token;
-    const id = payload?.id;
-    const password = payload?.password ;
-    const secretKey = config.jwt_access_token as string;
+//     const token = payload?.token;
+//     const id = payload?.id;
+//     const password = payload?.password ;
+//     const secretKey = config.jwt_access_token as string;
 
-    jwt.verify(token, secretKey, async(error: any, decoded: any) => {
-        if (error) {
-            throw new AppError(httpStatus.CONFLICT, "Invalid access token!");
-        } else {
-            const result = await User.updatePassword(id, password);
-           return result;
-        }
-    })
+//     jwt.verify(token, secretKey, async(error: any, decoded: any) => {
+//         if (error) {
+//             throw new AppError(httpStatus.CONFLICT, "Invalid access token!");
+//         } else {
+//             const result = await User.updatePassword(id, password);
+//            return result;
+//         }
+//     })
 
-};
+// };
 
 export const AuthService = {
     register,
     loginUser,
-    forgetPassword,
-    userPasswordReset,
+    // forgetPassword,
+    // userPasswordReset,
 }

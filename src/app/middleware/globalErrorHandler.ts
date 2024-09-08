@@ -19,7 +19,7 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
             path: "",
             message: "Something was wrong",
         }
-    ]
+    ];
 
     if (err instanceof ZodError) {
         const simplefeidError = handleZodError(err);
@@ -59,7 +59,7 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
         errorSource,
 
         stack: config.NODE_ENV == "development" ? err.stack : null,
-    })
+    });
 
 };
 
