@@ -40,5 +40,6 @@ Welcome to Car Rental Reservation System Backend. This project is crafted to str
 ```bash 
 git clone https://github.com/bashputi/car_rental_reservation.git
 cd car_rental_reservation
+```
 
 2. Install dependencies:
