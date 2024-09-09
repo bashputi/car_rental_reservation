@@ -23,8 +23,8 @@ app.use("/api", router);
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello Wrold')
 })
+export default app;
 
 app.use(globalErrorHandler);
 app.use(NotFound);
 
-export default app;
