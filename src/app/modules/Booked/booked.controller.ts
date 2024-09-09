@@ -20,10 +20,21 @@ const getAllOrders = catchAsync(async (req, res) => {
     sendResponce(res, {
         statusCode: httpStatus.OK,
         success: true,
-        message: "Cars retrived successfully",
+        message: "Bookings retrived successfully",
         data: result,
     });
 });
+
+const getMyOrder = catchAsync(async (req, res) => {
+    const { email } = req.user;
+    const result = await BookedService.getMyBookedFromDB(email);
+    sendResponce(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "My bookings retrived successfully",
+        data: result,
+    });
+})
 
 const getSingleOrder = catchAsync(async (req, res) => {
     const { id } = req.params;
@@ -38,24 +49,13 @@ const getSingleOrder = catchAsync(async (req, res) => {
 
 
 
-const getMyOrder = catchAsync(async (req, res) => {
-    const { email } = req.user;
-    const result = await BookedService.getMyBookedFromDB(email);
-    sendResponce(res, {
-        statusCode: httpStatus.OK,
-        success: true,
-        message: "My bookings retrived successfully",
-        data: result,
-    });
-})
-
 const returnBooked = catchAsync(async (req, res) => {
     const { bookingId: id } = req.body;
     const result = await BookedService.returnBookedIntoDB(id, req.body);
     sendResponce(res, {
         statusCode: httpStatus.OK,
         success: true,
-        message: "Car booked successfully",
+        message: "Car returned successfully",
         data: result,
     });
 })

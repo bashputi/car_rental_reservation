@@ -18,25 +18,13 @@ const createACar = catchAsync(async (req, res) => {
 });
 
 const getAllCars = catchAsync(async (req, res) => {
-    const { search = '', type= '', sortByPrice = 'asc', page = 1, limit = 8 } = req.query;
-   
-    const result = await CarService.GetAllCar(
-        search as string,
-        type as string,
-        sortByPrice as 'asc' | 'desc',
-        Number(page),
-        Number(limit)
-    );
-    if ( result.cars.length > 0) {
+    const result = await CarService.GetAllCar();
         sendResponce(res, {
             statusCode: httpStatus.OK,
             success: true,
-            message: "Car retrived successfully",
+            message: "Car retreived successfully",
             data: result,
         });
-    } else {
-        throw new AppError(httpStatus.NOT_FOUND, "No Data Found");
-    }
   
 });
 

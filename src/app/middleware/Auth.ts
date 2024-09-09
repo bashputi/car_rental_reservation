@@ -28,7 +28,7 @@ const auth = (...requiredRoles: Tuser_role[]) => {
         if(requiredRoles && !requiredRoles.includes(role)) {
             throw new AppError(
                 httpStatus.UNAUTHORIZED,
-                "You have no access to this route"
+                "You have no access to this routes"
             );
         }
         req.user = decoded as JwtPayload;

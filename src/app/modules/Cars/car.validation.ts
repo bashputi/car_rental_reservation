@@ -4,13 +4,13 @@ import { z } from "zod";
 const createCarValidationSchema = z.object({
     body: z.object({
         name: z.string({ required_error: "Name is required" }),
-        type: z.string({ required_error: "Type is required" }),
+        // type: z.string({ required_error: "Type is required" }),
         description: z.string({ required_error: "Description is required" }),
         color: z.string({ required_error: "Description is required" }),
         isElectric: z.boolean({ required_error: "Description is required" }),
         status: z.enum(["available", "unavailable"]).optional(),
         features: z.array(z.string({ required_error: "Description is required" })),
-        image: z.string({ required_error: "Image is required" }),
+        // image: z.string({ required_error: "Image is required" }),
         pricePerHour: z.number({ required_error: "Description is required" }),
         isDeleted: z
           .boolean({ required_error: "Description is required" })
